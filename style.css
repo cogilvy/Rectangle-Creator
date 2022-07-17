@@ -84,3 +84,41 @@ label {
   position: absolute;
   border-radius: 2%;
 }
+
+.resizer {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: orange;
+  z-index: 2;
+}
+
+.resizer.nw {
+  top: -2px;
+  left: -2px;
+  cursor: nw-resize;
+}
+
+.resizer.ne {
+  top: -2px;
+  right: -2px;
+  cursor: ne-resize;
+}
+
+.resizer.sw {
+  bottom: -2px;
+  left: -2px;
+  cursor: sw-resize;
+}
+
+.resizer.se {
+  bottom: -2px;
+  right: -2px;
+  cursor: se-resize;
+}
+
+.selected {
+  box-shadow: 0 0 15px #0ff;
+  /* in order: x offset, y offset, blur size, spread size, color */
+  cursor: grab;
+}
