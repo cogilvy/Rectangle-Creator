@@ -33,6 +33,8 @@ https://cogilvy.github.io/Rectangle-Creator/
   - Seems to be related to the page being scrolled down, and causing the amount of pixels moved relative to the page top/left to become greater.
 - Changing the color of a selected rectangle that was loaded from a previous layout will cause the previous layout to change without being saved.
   - Not necessarily a bug, but may cause confusion.
+- The layouts of rectangles are positioned using pixels, therefore are not responsive. Changing the window size after creating layouts will cause rectangles to overflow their container.
+  - Will need to re-calculate the position of the rectangles using a relative unit of measurement such as `em` or `rem`.
 
 
 **Browser Support**
