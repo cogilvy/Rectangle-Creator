@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./main.js"></script>
+  <title>Rectangle Creator</title>
+</head>
+<body>
+  <main>
+    <div class="container border-glow"></div>
+    <aside>
+      <h3>Saved Layouts:</h3>
+      <table>
+        <tbody id="prev-layouts">
+
+        </tbody>
+      </table>
+    </aside>
+  </main>
+  <div id="btn-container">
+    <div>
+      <label>
+        Select Color:
+        <input type="color" id="color-selector" />
+      </label>
+      <button class="btn" id="apply-color">Apply Color</button>
+      <button class="btn" id="delete-rect">Delete Selected Rectangle</button>
+    </div>
+    <div>
+      <label>
+        Layout Name:
+        <input id="layout-name" />
+      </label>
+      <button class="btn" id="save-layout">Save Current Layout</button>
+      <button class="btn" id="clear">Clear Layout</button>
+    </div>
+  </div>
+</body>
+</html>

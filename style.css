@@ -1,0 +1,82 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+main {
+  display: flex;
+}
+
+aside {
+  padding: 1% 2%;
+  width: 20vw;
+}
+
+.border-glow {
+  border: 1px solid black;
+  box-shadow: 0 0 5px grey;
+}
+
+.container {
+  height: 75vh;
+  width: 75vw;
+}
+
+#btn-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 75vw;
+  padding-top: 1%;
+}
+
+#btn-container div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 13vh;
+}
+
+.btn {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 4px;
+  font-size: 13px;
+  height: 30px;
+  padding: 0 20px;
+  color: #0e0e10;
+}
+
+input {
+  font-size: 14px;
+  border-radius: 6px;
+  line-height: 1.5;
+  padding: 5px 10px;
+  transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+  border: 2px solid #dee1e2;
+  color: rgb(14, 14, 16);
+  background: #fff;
+  height: 36px;
+  width: 100%;
+}
+
+input:hover {
+  border-color: #ccc;
+}
+
+input:focus {
+  border-color: #9147ff;
+  background: #def4fb;
+}
+
+label {
+  text-align: center;
+}
+
