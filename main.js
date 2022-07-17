@@ -154,7 +154,6 @@ function deleteRectangle() {
 
 function applyColor() {
   if (!selectedRect) return;
-  const newLayout = [...layout];
   selectedRect.style.backgroundColor = colorSelector.value;
   const rect = layout.find(r => r.id === selectedRect.id);
   rect.color = colorSelector.value;
