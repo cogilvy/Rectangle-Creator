@@ -30,7 +30,7 @@ let isDragging;
 let layout = [];
 let savedLayouts = [];
 
-
+// Functions
 
 // CREATE RECTANGLE
 function handleMouseDown(evt) {
@@ -63,6 +63,7 @@ function handleMouseUp(evt) {
   isMouseDown = false;
   currentRect = null;
 }
+
 
 
 // SAVE & RENDER LAYOUTS
@@ -125,6 +126,17 @@ function renderLayout(layout) {
   });
 }
 
+function deleteLayout(evt) {
+  const tr = evt.target.parentNode.parentNode;
+  savedLayouts = savedLayouts.filter(layout => layout.name !== evt.target.id);
+  tr.remove()
+  localStorage.setItem('layouts', JSON.stringify(savedLayouts));
+  renderSavedLayouts();
+}
+
+
+
+// EDIT LAYOUT
 function clearLayout(evt) {
   mainEl.innerHTML = '';
   layout = [];
@@ -132,6 +144,20 @@ function clearLayout(evt) {
   isResizing = false;
   isMouseDown = false;
   selectedRect = null;
+}
+
+function deleteRectangle() {
+  if (!selectedRect) return;
+  layout = layout.filter(r => r.id !== selectedRect.id);
+  selectedRect.remove();
+  selectedRect = null;
+}
+
+function applyColor() {
+  if (!selectedRect) return;
+  selectedRect.style.backgroundColor = colorSelector.value;
+  const rect = layout.find(r => r.id === selectedRect.id);
+  rect.color = colorSelector.value;
 }
 
 
