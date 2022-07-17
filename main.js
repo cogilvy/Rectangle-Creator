@@ -159,7 +159,6 @@ function applyColor() {
   rect.color = colorSelector.value;
 }
 
-
 function deleteLayout(evt) {
   const tr = evt.target.parentNode.parentNode;
   savedLayouts = savedLayouts.filter(layout => layout.name !== evt.target.id);
@@ -285,7 +284,3 @@ function selectRectangle(evt) {
     }
   }
 }
-
-
-
-
