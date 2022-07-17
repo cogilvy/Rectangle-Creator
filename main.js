@@ -40,7 +40,7 @@ let savedLayouts = [];
 
 // Functions
 
-// CREATE RECTANGLE
+// Create Rectangle
 function handleMouseDown(evt) {
   if (evt.target.classList.contains('rectangle') || isDragging || isResizing) return;
   const idNum = document.querySelectorAll('.rectangle').length+1;
@@ -73,8 +73,7 @@ function handleMouseUp(evt) {
 }
 
 
-
-// SAVE & RENDER LAYOUTS
+// Save & Render Layouts
 function saveCurrentLayout(evt) {
   if (!layout.length) return;
   const name = layoutNameInput.value;
@@ -91,7 +90,7 @@ function loadLayoutsFromLocalStorage() {
     renderSavedLayouts();
   }
 }
-loadLayoutsFromLocalStorage(); // Invoke here to load layouts on page load.
+loadLayoutsFromLocalStorage();
 
 function renderSavedLayouts() {
   prevLayoutsContainer.innerHTML = '';
@@ -134,17 +133,9 @@ function renderLayout(layout) {
   });
 }
 
-function deleteLayout(evt) {
-  const tr = evt.target.parentNode.parentNode;
-  savedLayouts = savedLayouts.filter(layout => layout.name !== evt.target.id);
-  tr.remove()
-  localStorage.setItem('layouts', JSON.stringify(savedLayouts));
-  renderSavedLayouts();
-}
 
 
-
-// EDIT LAYOUT
+// Edit Layouts
 function clearLayout(evt) {
   mainEl.innerHTML = '';
   layout = [];
@@ -163,15 +154,25 @@ function deleteRectangle() {
 
 function applyColor() {
   if (!selectedRect) return;
+  const newLayout = [...layout];
   selectedRect.style.backgroundColor = colorSelector.value;
   const rect = layout.find(r => r.id === selectedRect.id);
   rect.color = colorSelector.value;
 }
 
 
+function deleteLayout(evt) {
+  const tr = evt.target.parentNode.parentNode;
+  savedLayouts = savedLayouts.filter(layout => layout.name !== evt.target.id);
+  tr.remove()
+  localStorage.setItem('layouts', JSON.stringify(savedLayouts));
+  renderSavedLayouts();
+}
 
 
-// SELECT & DRAG RECTANGLE
+
+
+// Select, Drag, & Resize Rectangle
 function selectRectangle(evt) {
   if (!evt.target.classList.contains('rectangle')) return;
   selectedRect = evt.target;
@@ -285,3 +286,7 @@ function selectRectangle(evt) {
     }
   }
 }
+
+
+
+
