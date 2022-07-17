@@ -13,8 +13,12 @@ mainEl.addEventListener('mousedown', handleMouseDown);
 mainEl.addEventListener('mousemove', handleMouseMove);
 mainEl.addEventListener('mouseup', handleMouseUp);
 mainEl.addEventListener('click', selectRectangle);
+saveButton.addEventListener('click', saveCurrentLayout);
+clearButton.addEventListener('click', clearLayout);
+prevLayoutsContainer.addEventListener('click', selectSavedLayout);
 
 // State Variables
+let selectedRect;
 let currentRect;
 let startX;
 let startY;
@@ -24,10 +28,11 @@ let isMouseDown;
 let isResizing;
 let isDragging;
 let layout = [];
+let savedLayouts = [];
 
 
 
-// Functions
+// CREATE RECTANGLE
 function handleMouseDown(evt) {
   if (evt.target.classList.contains('rectangle') || isDragging || isResizing) return;
   const idNum = document.querySelectorAll('.rectangle').length+1;
@@ -60,7 +65,74 @@ function handleMouseUp(evt) {
 }
 
 
+// SAVE & RENDER LAYOUTS
+function saveCurrentLayout(evt) {
+  if (!layout.length) return;
+  const name = layoutNameInput.value;
+  savedLayouts.push({layout, name});
+  localStorage.setItem('layouts', JSON.stringify(savedLayouts));
+  renderSavedLayouts();
+}
 
+function loadLayoutsFromLocalStorage() {
+  let previousLayouts = localStorage.getItem('layouts');
+  if (previousLayouts) {
+    previousLayouts = JSON.parse(previousLayouts);
+    savedLayouts.push(...previousLayouts);
+    renderSavedLayouts();
+  }
+}
+loadLayoutsFromLocalStorage(); // Invoke here to load layouts on page load.
+
+function renderSavedLayouts() {
+  prevLayoutsContainer.innerHTML = '';
+  if (savedLayouts.length) {
+    savedLayouts.forEach(function(layout) {
+      const row = `
+      <tr>
+        <td>${layout.name}</td>
+        <td><button id="${layout.name}" class="btn saved">View</button></td>
+        <td><button id="${layout.name}" class="btn del">Del</button></td>
+      </tr>
+      `;
+      prevLayoutsContainer.innerHTML += row;
+    });
+  } else {
+    prevLayoutsContainer.innerHTML = `<h4 style="text-align: center;">Create and save some layouts to add to your list!</h4>`;
+  }
+}
+
+function selectSavedLayout(evt) {
+  if (evt.target.classList.contains('del')) return deleteLayout(evt);
+  if (!evt.target.classList.contains('saved')) return;
+  const selected = savedLayouts.find(layout => layout.name === evt.target.id);
+  renderLayout(selected.layout);
+  layout = [...selected.layout];
+}
+
+function renderLayout(layout) {
+  clearLayout();
+  layout.forEach(rectangle => {
+    let rect = document.createElement('div');
+    rect.id = rectangle.id;
+    rect.classList.add('rectangle');
+    rect.style.backgroundColor = rectangle.color;
+    rect.style.left = `${rectangle.startX}px`;
+    rect.style.top = `${rectangle.startY}px`;
+    rect.style.width = `${rectangle.endX - rectangle.startX}px`;
+    rect.style.height = `${rectangle.endY - rectangle.startY}px`;
+    mainEl.appendChild(rect);
+  });
+}
+
+function clearLayout(evt) {
+  mainEl.innerHTML = '';
+  layout = [];
+  isDragging = false;
+  isResizing = false;
+  isMouseDown = false;
+  selectedRect = null;
+}
 
 
 
