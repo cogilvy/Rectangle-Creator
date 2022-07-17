@@ -80,3 +80,7 @@ label {
   text-align: center;
 }
 
+.rectangle {
+  position: absolute;
+  border-radius: 2%;
+}
