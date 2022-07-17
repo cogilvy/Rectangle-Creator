@@ -8,14 +8,22 @@ const layoutNameInput = document.getElementById('layout-name');
 const deleteRectBtn = document.getElementById('delete-rect');
 const applyColorBtn = document.getElementById('apply-color');
 
+window.addEventListener('click', closeModal);
+
 // Event Listeners
-mainEl.addEventListener('mousedown', handleMouseDown);
-mainEl.addEventListener('mousemove', handleMouseMove);
-mainEl.addEventListener('mouseup', handleMouseUp);
-mainEl.addEventListener('click', selectRectangle);
-saveButton.addEventListener('click', saveCurrentLayout);
-clearButton.addEventListener('click', clearLayout);
-prevLayoutsContainer.addEventListener('click', selectSavedLayout);
+function closeModal() {
+  window.removeEventListener('click', closeModal);
+  document.getElementById('modal').remove();
+  mainEl.addEventListener('mousedown', handleMouseDown);
+  mainEl.addEventListener('mousemove', handleMouseMove);
+  mainEl.addEventListener('mouseup', handleMouseUp);
+  mainEl.addEventListener('click', selectRectangle);
+  saveButton.addEventListener('click', saveCurrentLayout);
+  clearButton.addEventListener('click', clearLayout);
+  prevLayoutsContainer.addEventListener('click', selectSavedLayout);
+  deleteRectBtn.addEventListener('click', deleteRectangle);
+  applyColorBtn.addEventListener('click', applyColor);
+}
 
 // State Variables
 let selectedRect;
